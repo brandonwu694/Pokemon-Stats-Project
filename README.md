@@ -4,14 +4,12 @@ This project builds a regression model to predict a Pokemon's `total_points` fro
 
 ## Initial Model Features
 
-The current baseline feature set in [notebooks/02_feature_engineering.ipynb](/Users/brandonwu/Documents/Pokemon_Project/notebooks/02_feature_engineering.ipynb) is designed for a linear model and keeps the feature space intentionally lean.
-
 Target:
 - `total_points`
 
 Numeric features:
 - `generation`
-- `height_m`
+- `log_height_m`
 - `log_weight_kg`
 
 Categorical features to one-hot encode:
@@ -22,14 +20,15 @@ Categorical features to one-hot encode:
 
 Design choices:
 - `log_weight_kg` is used instead of raw `weight_kg` to reduce skew and give linear models a smoother signal.
-- `base_experience` is excluded because it is too close to the prediction target and would make the problem less interpretable.
-- Ability columns and matchup (`against_*`) columns are excluded from the baseline to avoid a wide, redundant feature set in the first linear model.
-
-## Why This Is The Baseline
+- `log_height_m` is used instead of raw `height_m` to reduce skew for a cleaner linear model input.
 
 This feature set is meant to produce an interpretable first model before adding more expressive or higher-dimensional inputs. It favors:
 - lower multicollinearity
 - easier coefficient interpretation
 - less risk of overfitting on a small dataset
 
+In earlier stages of feature engineering, several features were proposed in hopes to give the model more context, but many turned out to be repetitive. For example, a feature such as `is_dual_type` was eliminated because a Pokemon's typing was already represented through features `type_1` and `type_2`. 
 
+## Modeling Plan
+
+The project will first use this baseline feature set across progressively more complex models. New features will only be added if performance stalls and results suggest that the current feature space is not capturing enough predictive information.
