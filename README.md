@@ -35,8 +35,6 @@ The project will first use this baseline feature set across progressively more c
 
 ## Model Results
 
-Initial regression baseline using `DummyRegressor(strategy="mean")`:
-
 | Model | RMSE | MAE | R^2 |
 | --- | ---: | ---: | ---: |
 | Dummy Regressor | 124.00 | 99.92 | -0.003 |
