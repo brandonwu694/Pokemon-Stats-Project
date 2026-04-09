@@ -32,3 +32,11 @@ In earlier stages of feature engineering, several features were proposed in hope
 ## Modeling Plan
 
 The project will first use this baseline feature set across progressively more complex models. New features will only be added if performance stalls and results suggest that the current feature space is not capturing enough predictive information.
+
+## Baseline Results
+
+Initial regression baseline from [notebooks/04_initial_modeling.ipynb](/Users/brandonwu/Documents/Pokemon_Project/notebooks/04_initial_modeling.ipynb) using `DummyRegressor(strategy="mean")`:
+
+| Model | RMSE | MAE | R^2 |
+| --- | ---: | ---: | ---: |
+| Dummy Regressor | 124.00 | 99.92 | -0.003 |
