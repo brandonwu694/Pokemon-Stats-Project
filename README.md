@@ -38,4 +38,8 @@ The project will first use this baseline feature set across progressively more c
 | Model | RMSE | MAE | R^2 |
 | --- | ---: | ---: | ---: |
 | Dummy Regressor | 124.00 | 99.92 | -0.003 |
-| Linear Regression 1st Iteration | 68.22 | 55.46 | 0.696 |
+| Linear Regression | 68.22 | 55.46 | 0.696 |
+| Ridge Regression | 68.22 | 55.46 | 0.696 |
+| Lasso Regression | 68.21 | 55.44 | 0.697 |
+
+Ridge regression showed negligible improvement over linear regression, suggesting that the current feature set is reasonably stable and not strongly benefiting from L2 regularization.
