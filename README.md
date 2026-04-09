@@ -32,14 +32,4 @@ This feature set is meant to produce an interpretable first model before adding 
 - easier coefficient interpretation
 - less risk of overfitting on a small dataset
 
-## Likely Next Steps For More Complex Models
 
-Yes, it is likely that additional features will be worth testing for more complex models such as random forest, gradient boosting, or XGBoost-style models.
-
-Feature groups worth revisiting later:
-- ability columns: `ability_1`, `ability_2`, `ability_hidden`
-- type-effectiveness columns: `against_*`
-- compact defensive summaries: counts of weaknesses, resistances, and immunities
-- additional body-shape features such as `weight_height_ratio`
-
-For more complex models, the main recommendation is to add one feature group at a time and compare validation performance rather than expanding everything at once.
