@@ -33,7 +33,7 @@ In earlier stages of feature engineering, several features were proposed in hope
 
 The project will first use this baseline feature set across progressively more complex models. New features will only be added if performance stalls and results suggest that the current feature space is not capturing enough predictive information.
 
-## Model Results
+## Linear Model Results
 
 | Model | RMSE | MAE | R^2 |
 | --- | ---: | ---: | ---: |
@@ -42,4 +42,16 @@ The project will first use this baseline feature set across progressively more c
 | Ridge Regression | 68.22 | 55.46 | 0.696 |
 | Lasso Regression | 68.21 | 55.44 | 0.697 |
 
-Ridge regression showed negligible improvement over linear regression, suggesting that the current feature set is reasonably stable and not strongly benefiting from L2 regularization.
+Both Ridge and Lasso regression showed negligible improvement over linear regression, suggesting that the current feature set is reasonably stable and not strongly benefiting from L2 or L1 regularization.
+
+## Tree Based Model Results
+
+| Model | RMSE | MAE | R^2 |
+| --- | ---: | ---: | ---: |
+| Decision Tree Regressor | 82.83 | 57.69 | 0.553 |
+| Random Forest Regressor | 62.07 | 46.42 | 0.749 |
+| Gradient Boosting Regressor | 62.51 | 47.65 | 0.745 |
+
+Random forest is still the strongest model so far, with gradient boosting performing competitively but slightly worse on the current baseline feature set.
+
+The stronger performance of the tree-based ensemble models relative to the linear models suggests that the current feature set contains nonlinear patterns and interactions that simple linear models are not fully capturing.
