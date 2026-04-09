@@ -35,7 +35,7 @@ The project will first use this baseline feature set across progressively more c
 
 ## Baseline Results
 
-Initial regression baseline from [notebooks/04_initial_modeling.ipynb](/Users/brandonwu/Documents/Pokemon_Project/notebooks/04_initial_modeling.ipynb) using `DummyRegressor(strategy="mean")`:
+Initial regression baseline using `DummyRegressor(strategy="mean")`:
 
 | Model | RMSE | MAE | R^2 |
 | --- | ---: | ---: | ---: |
