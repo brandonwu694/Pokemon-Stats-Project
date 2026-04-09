@@ -33,10 +33,11 @@ In earlier stages of feature engineering, several features were proposed in hope
 
 The project will first use this baseline feature set across progressively more complex models. New features will only be added if performance stalls and results suggest that the current feature space is not capturing enough predictive information.
 
-## Baseline Results
+## Model Results
 
 Initial regression baseline using `DummyRegressor(strategy="mean")`:
 
 | Model | RMSE | MAE | R^2 |
 | --- | ---: | ---: | ---: |
 | Dummy Regressor | 124.00 | 99.92 | -0.003 |
+| Linear Regression 1st Iteration | 68.22 | 55.46 | 0.696 |
