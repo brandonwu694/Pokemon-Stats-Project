@@ -29,11 +29,20 @@ This feature set is meant to produce an interpretable first model before adding 
 
 In earlier stages of feature engineering, several features were proposed in hopes to give the model more context, but many turned out to be repetitive. For example, a feature such as `is_dual_type` was eliminated because a Pokemon's typing was already represented through features `type_1` and `type_2`. 
 
+After error analysis on the initial XGBoost model, special-variant indicator features were added to the tree-based modeling pipeline:
+- `is_mega`
+- `is_primal`
+- `is_form`
+
+These variant indicators were introduced because several of the worst predictions involved Mega, Primal, or alternate-form Pokemon that were not being represented explicitly by the original baseline feature space.
+
 ## Modeling Plan
 
 The project will first use this baseline feature set across progressively more complex models. New features will only be added if performance stalls and results suggest that the current feature space is not capturing enough predictive information.
 
 ## Linear Model Results
+
+The linear-model results below were produced on the original baseline feature set before the special-variant indicators were added.
 
 | Model | RMSE | MAE | R^2 |
 | --- | ---: | ---: | ---: |
@@ -46,14 +55,16 @@ Both Ridge and Lasso regression showed negligible improvement over linear regres
 
 ## Tree Based Model Results
 
+The tree-based results below reflect the later feature set that includes the added special-variant indicators from error analysis.
+
 | Model | RMSE | MAE | R^2 |
 | --- | ---: | ---: | ---: |
-| Decision Tree Regressor | 82.83 | 57.69 | 0.553 |
-| Random Forest Regressor | 62.07 | 46.42 | 0.749 |
-| Gradient Boosting Regressor | 62.51 | 47.65 | 0.745 |
-| XGBoost Regressor | 61.71 | 46.83 | 0.752 |
-| Tuned XGBoost Regressor | 60.49 | 45.69 | 0.761 |
+| Decision Tree Regressor | 77.27 | 52.49 | 0.611 |
+| Random Forest Regressor | 59.34 | 43.37 | 0.770 |
+| Gradient Boosting Regressor | 58.85 | 43.56 | 0.774 |
+| XGBoost Regressor | 59.06 | 42.94 | 0.773 |
+| Tuned XGBoost Regressor | 58.95 | 42.31 | 0.773 |
 
-Tuned XGBoost is the strongest model so far, showing that the current feature set still benefits from model-side optimization and outperforming both the untuned tree ensembles and all linear baselines.
+The expanded tree-based feature set improved performance across the ensemble models, though the gains were modest. Tuned XGBoost remains the best overall model so far, with gradient boosting and random forest performing very competitively on the same updated feature space.
 
 The stronger performance of the tree-based ensemble models relative to the linear models suggests that the current feature set contains nonlinear patterns and interactions that simple linear models are not fully capturing.
