@@ -52,7 +52,8 @@ Both Ridge and Lasso regression showed negligible improvement over linear regres
 | Random Forest Regressor | 62.07 | 46.42 | 0.749 |
 | Gradient Boosting Regressor | 62.51 | 47.65 | 0.745 |
 | XGBoost Regressor | 61.71 | 46.83 | 0.752 |
+| Tuned XGBoost Regressor | 60.49 | 45.69 | 0.761 |
 
-XGBoost is the strongest model so far, though its improvement over random forest is modest and both models substantially outperform the linear baselines.
+Tuned XGBoost is the strongest model so far, showing that the current feature set still benefits from model-side optimization and outperforming both the untuned tree ensembles and all linear baselines.
 
 The stronger performance of the tree-based ensemble models relative to the linear models suggests that the current feature set contains nonlinear patterns and interactions that simple linear models are not fully capturing.
