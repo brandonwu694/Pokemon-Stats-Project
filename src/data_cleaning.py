@@ -1,4 +1,10 @@
+import sys 
+from pathlib import Path 
+sys.path.append(str(Path(__file__).resolve().parents[1]))
+
 import pandas as pd
+
+from config import RAW_DATA_DIR
 
 
 def impute_value(df: pd.DataFrame, col: str, round_to_int: bool = True) -> pd.DataFrame:
@@ -74,7 +80,7 @@ def clean_str_columns(df: pd.DataFrame) -> pd.DataFrame:
 
 def handle_missing_values(df: pd.DataFrame) -> pd.DataFrame:
     """Remove missing values from columns"""
-    required = ["ability_2", "ability_hidden", "weight_kg", "growth_rate"]
+    required = ["ability_2", "ability_hidden", "weight_kg", "growth_rate", "type_2"]
     missing = [c for c in required if c not in df.columns]
 
     if missing:
@@ -88,6 +94,8 @@ def handle_missing_values(df: pd.DataFrame) -> pd.DataFrame:
     df["growth_rate"] = df["growth_rate"].fillna(
         df["growth_rate"].mode()[0]
     )
+
+    df["type_2"] = df["type_2"].fillna("None")
     return df
 
 
@@ -97,10 +105,41 @@ def execute_data_cleaning_pipeline(df: pd.DataFrame) -> pd.DataFrame:
     # Drop unnecessary columns
     df = drop_cols(df)
 
+    # Drop missing columns
+    df = handle_missing_values(df)
+
     # Impute/handle missing values
     df = impute_values(df)
 
     # Clean str/object dtype cols
     df = clean_str_columns(df)
 
+    # Add missing ability for Regidrago
+    assert df.at[1039, "name"] == "regidrago"
+    df.loc[1039, "ability_1"] = "Dragon's Maw"
+
     return df
+
+
+def validate_dataset(df: pd.DataFrame) -> None:
+    """Print a compact validation summary for the cleaned dataset."""
+    missing_by_col = df.isna().sum()
+    total_missing = int(missing_by_col.sum())
+
+    assert total_missing == 0
+
+    print("\nDataset validation")
+    print("=" * 60)
+    print(f"Shape: {df.shape[0]} rows x {df.shape[1]} columns")
+    print(f"Total missing values: {total_missing}")
+    print("\nMissing values by column:")
+    print(missing_by_col.to_string())
+    print("\nSample rows:")
+    print(df.head(5).to_string(index=False))
+    print("=" * 60)
+
+
+if __name__ == "__main__":
+    pokemon_df = pd.read_csv(RAW_DATA_DIR / "pokedex.csv")
+    pokemon_df_clean = execute_data_cleaning_pipeline(pokemon_df)
+    validate_dataset(pokemon_df_clean)
