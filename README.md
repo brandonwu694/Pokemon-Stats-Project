@@ -64,7 +64,8 @@ The tree-based results below reflect the later feature set that includes the add
 | Gradient Boosting Regressor | 58.85 | 43.56 | 0.774 |
 | XGBoost Regressor | 59.06 | 42.94 | 0.773 |
 | Tuned XGBoost Regressor | 58.95 | 42.31 | 0.773 |
+| Tuned XGBoost Regressor + `evo_stage` | 52.54 | 37.89 | 0.820 |
 
-The expanded tree-based feature set improved performance across the ensemble models, though the gains were modest. Tuned XGBoost remains the best overall model so far, with gradient boosting and random forest performing very competitively on the same updated feature space.
+The expanded tree-based feature set improved performance across the ensemble models, though the gains were initially modest. Adding `evo_stage` provided meaningful additional signal: after the tuned XGBoost model plateaued at `R^2 = 0.773`, incorporating evolutionary stage improved performance to `R^2 = 0.820` while reducing RMSE from `58.95` to `52.54` and MAE from `42.31` to `37.89`. This suggests that evolutionary progression captures important information about overall Pokemon strength that was not fully represented by typing and special-form indicators alone.
 
 The stronger performance of the tree-based ensemble models relative to the linear models suggests that the current feature set contains nonlinear patterns and interactions that simple linear models are not fully capturing.
