@@ -116,7 +116,7 @@ def execute_data_cleaning_pipeline(df: pd.DataFrame) -> pd.DataFrame:
 
     # Add missing ability for Regidrago
     assert df.at[1039, "name"] == "regidrago"
-    df.loc[1039, "ability_1"] = "Dragon's Maw"
+    df.loc[1039, "ability_1"] = "dragon's maw"
 
     return df
 
