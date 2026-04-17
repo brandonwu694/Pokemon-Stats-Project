@@ -2,6 +2,17 @@
 
 This project builds a regression model to predict a Pokemon's `total_points` from non-battle-summary features in the cleaned Pokedex dataset.
 
+## Pokedex dataset source
+
+- The initial dataset used for this project comes from [Master Pokemon Dataset with corpus version on Kaggle](https://www.kaggle.com/datasets/hanicier/master-pokemon-dataset-with-corpus-version).
+- Use that dataset as the source for `pokedex.csv` and place it in `data/raw/`.
+
+## Evolution dataset source
+
+- The evolution-stage dataset used in this project comes from [Daalma7/PokemonDataScience](https://github.com/Daalma7/PokemonDataScience).
+- In that repository, the original file is located at `data/Pokemon.csv`.
+- For this project, rename that file to `pokemon_evolutions.csv` and place it in `data/raw/`.
+
 ## How To Run
 
 Place the required raw input files in `data/raw/`:
