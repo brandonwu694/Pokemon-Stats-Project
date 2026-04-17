@@ -2,6 +2,47 @@
 
 This project builds a regression model to predict a Pokemon's `total_points` from non-battle-summary features in the cleaned Pokedex dataset.
 
+## How To Run
+
+Place the required raw input files in `data/raw/`:
+- `pokedex.csv`
+- `pokemon_evolutions.csv`
+
+Then run the full pipeline from the project root:
+
+```bash
+python3 src/main.py
+```
+
+The pipeline will:
+- clean the raw Pokemon dataset
+- engineer features, including `evo_stage`
+- train the tuned XGBoost regressor
+- save intermediate datasets to `data/processed/`
+- save the trained model and metrics to `models/`
+
+Expected output artifacts:
+- `data/processed/pokemon_data_clean.parquet`
+- `data/processed/pokemon_data_features_evo_stage.parquet`
+- `models/xg_boost_tuned.joblib`
+- `models/xg_boost_tuned_metrics.json`
+
+## Project Structure
+
+Main directories:
+- `data/raw/`: raw input datasets used by the pipeline
+- `data/processed/`: cleaned and feature-engineered parquet outputs
+- `models/`: saved trained model artifacts and evaluation metrics
+- `notebooks/`: exploratory analysis, feature work, tuning, and error-analysis notebooks
+- `src/`: reusable pipeline modules and the main entrypoint
+
+Key source files:
+- `src/main.py`: end-to-end pipeline runner for cleaning, feature engineering, and model training
+- `src/data_cleaning.py`: raw dataset cleaning, imputation, string normalization, and cleaned-dataset validation
+- `src/feature_engineering.py`: feature creation, categorical encoding, evolution-stage merge, and feature-dataset validation
+- `src/model_training.py`: train/test split, tuned XGBoost training, evaluation, and artifact saving
+- `config.py`: shared project paths for data and model directories
+
 ## Initial Model Features
 
 Target:
