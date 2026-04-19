@@ -64,7 +64,8 @@ def main() -> None:
 
     print("Training model...")
     model, metrics, _ = execute_model_training_pipeline(pokemon_features)
-    save_training_artifacts(model, metrics)
+    feature_columns = pokemon_features.drop(columns=["total_points"]).columns.tolist()
+    save_training_artifacts(model, metrics, feature_columns)
 
     print("\nFull pipeline completed successfully.")
 

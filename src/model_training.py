@@ -94,13 +94,16 @@ def evaluate_model(estimator: BaseEstimator, X_test: pd.DataFrame, y_test: pd.Se
 def save_training_artifacts(
     estimator: BaseEstimator,
     metrics: dict[str, float],
+    feature_columns: list[str],
     model_path: Path = MODELS_DIR / "xg_boost_tuned.joblib",
     metrics_path: Path = MODELS_DIR / "xg_boost_tuned_metrics.json",
+    columns_path: Path = MODELS_DIR / "xg_boost_tuned_columns.json",
 ) -> None:
     """Persist the trained model and evaluation metrics."""
     MODELS_DIR.mkdir(parents=True, exist_ok=True)
     joblib.dump(estimator, model_path)
     metrics_path.write_text(json.dumps(metrics, indent=2))
+    columns_path.write_text(json.dumps(feature_columns, indent=2))
 
 
 def execute_model_training_pipeline(df: pd.DataFrame) -> tuple[BaseEstimator, dict[str, float], dict[str, Any]]:
@@ -121,4 +124,5 @@ def execute_model_training_pipeline(df: pd.DataFrame) -> tuple[BaseEstimator, di
 if __name__ == "__main__":
     pokemon_df = pd.read_parquet(PROCESSED_DATA_DIR / "pokemon_data_features_evo_stage.parquet")
     model, metrics, _ = execute_model_training_pipeline(pokemon_df)
-    save_training_artifacts(model, metrics)
+    feature_columns = pokemon_df.drop(columns=["total_points"]).columns.tolist()
+    save_training_artifacts(model, metrics, feature_columns)
