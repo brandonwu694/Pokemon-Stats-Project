@@ -121,4 +121,4 @@ def execute_model_training_pipeline(df: pd.DataFrame) -> tuple[BaseEstimator, di
 if __name__ == "__main__":
     pokemon_df = pd.read_parquet(PROCESSED_DATA_DIR / "pokemon_data_features_evo_stage.parquet")
     model, metrics, _ = execute_model_training_pipeline(pokemon_df)
-    # save_training_artifacts(model, metrics)
+    save_training_artifacts(model, metrics)
