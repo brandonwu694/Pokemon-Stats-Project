@@ -38,6 +38,25 @@ Expected output artifacts:
 - `models/xg_boost_tuned.joblib`
 - `models/xg_boost_tuned_metrics.json`
 
+## Deployment
+
+The FastAPI app is deployed on Render:
+- App URL: `https://pokemon-stats-project.onrender.com`
+- API docs: `https://pokemon-stats-project.onrender.com/docs`
+- Prediction endpoint: `POST https://pokemon-stats-project.onrender.com/predict`
+
+For Render, the web service start command is:
+
+```bash
+uvicorn app.main:app --host 0.0.0.0 --port $PORT
+```
+
+Local development can still use:
+
+```bash
+uvicorn app.main:app --reload
+```
+
 ## Project Structure
 
 Main directories:
